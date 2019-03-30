@@ -5,8 +5,8 @@ class Headless
   class << self
     def delegate(*fields, to:)
       fields.each do |field|
-        define_method(:field) do
-          to.send(field)
+        define_method(field) do
+          self.send(to).send(field)
         end
       end
     end
@@ -44,24 +44,16 @@ class Headless
   def fill_in_first_name
     first_name = iframe.text_field(id: 'first_name') 
     first_name.set 'Carlos'
-
-    while true; sleep 10; end
   end
 
   def apply_with_linked_in
     iframe.button(name: 'button').click
 
-    while windows.size == 1
-      sleep 0.1
-    end
-
+    Watir::Wait.until { windows.size == 2 }
+ 
     windows[1].wait_while(&:present?)
 
-    windows[0].move_to
-
     iframe.button(id: 'submit_app').click
-
-    while true; sleep 10; end
   end
 
   def apply_with_linked_in_link
