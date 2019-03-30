@@ -1,7 +1,7 @@
 require 'watir'
 require './config'
 
-class Headless
+class Driver
   class << self
     def delegate(*fields, to:)
       fields.each do |field|
