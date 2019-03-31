@@ -12,6 +12,7 @@ class Org
   def apply(user:, driver:)
     klass = Object.const_get(@strategy)
     klass.new(
+      org: self,
       org_name: @name,
       token: @token,
       callback_url: @callback_url
@@ -22,6 +23,9 @@ class Org
     # no-op
     # The organization subclass handles any elements of the application that are specific to it's webpage/process.
   end
+
+
+
 
   # lists all organization names that have custom options
   # enabled. We can enable and disable custom org logic here

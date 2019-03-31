@@ -7,14 +7,14 @@ User:
 
   resume_location: file_path/resume.pdf
 
-  linkedin_link: /john.smith.209
-  github_link: /js209
-  personal_link: nil
+  linkedin_username: john.smith.209
+  github_username: js209
+  personal_link:
 
   gender: M
   hispanic_latino: true
   veteran_status: false
-  disability_status: nil
+  disability_status:
 
 Address:
   address_no: 123

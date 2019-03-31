@@ -2,9 +2,10 @@ require_relative '../lib/strategy'
 require 'byebug'
 
 class Greenhouse < Strategy
-  attr_reader :org_name, :token, :callback_url
+  attr_reader :org, :org_name, :token, :callback_url
 
-  def initialize(org_name:, token:, callback_url: nil)
+  def initialize(org:, org_name:, token:, callback_url: nil)
+    @org = org
     @org_name = org_name
     @token = token
     @callback_url = callback_url
@@ -13,10 +14,16 @@ class Greenhouse < Strategy
   def apply(user:, driver:)
     # visit the greenhouse page
     driver.visit(url)
-    # fill in the fields
-    fill(driver: driver, user: user)
+
+    # Get all the fields that need to be filled for this org
+    all_fields = fields + org.org_custom_fields
+
+    # fill in the generic fields
+    fill(driver: driver, user: user, fields: all_fields)
+
     # hit submit....
     submit(driver: driver)
+
     sleep 100
   end
 
@@ -30,7 +37,7 @@ class Greenhouse < Strategy
     base + q_params
   end
 
-  def fill(driver:, user:)
+  def fill(driver:, user:, fields:)
     fields.each do |field|
       data = user.send(field[:user_field_name])
       field_type = field[:type]
@@ -51,6 +58,7 @@ class Greenhouse < Strategy
     # Each field should have a way of "filling in" for this strategy
     # careful there is some coupling to driver browser instance implementation
     [
+      # These should be objects
       {
         type: 'text_field',
         id: 'first_name',

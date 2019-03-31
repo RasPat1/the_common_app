@@ -19,14 +19,23 @@ class UserAdapter < Adapter
 
       resume_location: user_data["resume_location"],
 
-      linkedin_link: user_data["linkedin_link"],
-      github_link: user_data["github_link"],
+      linkedin_link: linkify(user_data["linkedin_username"], :li),
+      github_link: linkify(user_data["github_username"], :gh),
       personal_link: user_data["personal_link"],
     }
 
     validate(data)
 
     User.new(**data, address: address)
+  end
+
+  def self.linkify(path, type)
+    case type
+    when :li
+      "https://www.linkedin.com/in/#{path}"
+    when :gh
+      "https://www.github.com/#{path}"
+    end
   end
 
   def self.parse_dob(dob_string)
