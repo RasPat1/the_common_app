@@ -20,21 +20,27 @@ class Driver
     @urls = urls
     @browser_instance = browser_instance
 
-    visit
+    visit(urls[0])
   end
 
-  def visit
-    @visit ||= browser_instance.goto(urls[0])
-  end
-
-  def iframe
-    browser_instance
-      .iframe(id: 'grnhse_iframe')
-      .wait_until(&:present?).tap { |thing| thing.click }
+  def visit(url)
+    browser_instance.goto(url)
   end
 
   def iframe_html
     iframe.html
+  end
+
+  def element(**args)
+    browser_instance.element(**args)
+  end
+
+  def execute_script(script, *args)
+    browser_instance.execute_script(script, *args)
+  end
+
+  def iframe(args)
+    browser_instance.iframe(args)
   end
 
   def click_a_link
@@ -65,4 +71,3 @@ class Driver
   attr_reader :urls
 end
 
-Headless.new(urls: [Config::TESTING_LINK]).apply_with_linked_in
