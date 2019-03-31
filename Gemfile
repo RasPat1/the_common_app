@@ -7,4 +7,4 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem 'rspec'
 gem 'guard-rspec'
 gem 'watir'
-gem 'pry'
+gem 'byebug'
