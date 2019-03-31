@@ -1,17 +1,8 @@
 require './driver'
+require 'forwardable'
 
 class Page
-  class << self
-    def delegate(*fields, to:)
-      fields.each do |field|
-        define_method(field) do
-          self.send(to).send(field)
-        end
-      end
-    end
-  end
-
-  delegate :html, :windows, :link, :button, to: :driver
+  extend Forwardable
 
   def initialize(driver: Driver.new(urls: [self.class::URL]))
     @driver = driver
@@ -20,4 +11,5 @@ class Page
   private
 
   attr_reader :driver
+  def_delegators :driver, :html, :windows, :link, :button
 end

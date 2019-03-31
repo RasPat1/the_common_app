@@ -1,20 +1,10 @@
 require 'watir'
 require './config'
+require 'forwardable'
 
 class Driver
-  class << self
-    def delegate(*fields, to:)
-      fields.each do |field|
-        define_method(field) do
-          self.send(to).send(field)
-        end
-      end
-    end
-  end
-
+  extend Forwardable
   attr_reader :browser_instance
-
-  delegate :html, :windows, :link, :button, to: :browser_instance
 
   def initialize(urls:, browser_instance: nil)
     @urls = urls
@@ -80,6 +70,7 @@ class Driver
   end
 
   private
-
   attr_reader :urls
+
+  def_delegators :browser_instance, :html, :windows, :link, :button
 end
