@@ -75,10 +75,8 @@ class Greenhouse < Strategy
         preferred_finder_name: 'id',
         user_field_name: :phone,
       },
+      # then there are a bunch of drop downs
     ]
   end
-
-  # map way of finding field with the piece of data on teh suer it's on
-
 
 end

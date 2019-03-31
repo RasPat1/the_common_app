@@ -6,17 +6,19 @@
 * users can select companies they are interesetd in.Allow users to select which companies they are interested in applying to.
 
 
-# Steps
+## Steps
 ---
-* Add a storage system
-* Add a structured but flexible data set to get an idividuals information
-* Add a structure for modeling the different types of questions that a cmpany might ask
-* Store the required fields that each organization wants.
-* Have a specifc strategy on how to apply to each organization
+*
+
+## Milestones
+---
+* Apply to one comapny automatically
+* Apply to many greenhouse companies automatically
+* Handle different job types
 
 
-
-# DONE
+## DONE
 ---
 * Headless browser class that opens the browser and clicks on 'apply with linked
 in'
+* Add a structured but flexible data set to get an idividuals information
