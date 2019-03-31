@@ -1,32 +1,37 @@
 require './page'
+require 'pry'
 
 class Evernote < Page
   URL = 'https://evernote.com/careers/job/?id=1386988&gh_jid=1386988'
 
   def iframe
-    driver
+    @iframe ||= driver
       .iframe(id: 'grnhse_iframe')
       .wait_until(&:present?).tap { |thing| thing.click }
   end
 
+  def extract_source(iframe)
+    iframe.attribute_value('src')
+  end
+
   def run
-    iframe.iframe.wait_until(&:present?)
+    start = driver.iframe(id: 'grnhse_iframe')
 
-    driver.visit(iframe.attribute_value('src'))
-
-    inner_iframe = driver.element(tag_name: 'iframe')
-
-    inner_iframe.wait_until(&:present?) 
+    js_hack = "return document.getElementsByTagName('button')[0].click()"
+    js_check = "return document.getElementsByTagName('button').length"
 
     sleep 2
+    start.iframe
+    start.iframe.button
+    start.iframe.button.click
 
-    inner_iframe.execute_script(
-      <<~JS
-        document.getElementsByTagName("button")[0].click()
-      JS
-    )
+    driver.wait_until do
+      value = start.iframe.execute_script(js_check)
+      value > 0
+    end
 
-    while true; sleep 1; end
+    start.iframe.execute_script(js_hack)
+    driver.wait_until_user_exits_window_and_shit
 
     self
   end

@@ -48,18 +48,26 @@ class Driver
   end
 
   def fill_in_first_name
-    first_name = iframe.text_field(id: 'first_name') 
+    first_name = iframe.text_field(id: 'first_name')
     first_name.set 'Carlos'
   end
 
   def apply_with_linked_in
     iframe.button(name: 'button').click
 
-    Watir::Wait.until { windows.size == 2 }
- 
+    wait_until_user_exits_window_and_shit
+
     windows[1].wait_while(&:present?)
 
     iframe.button(id: 'submit_app').click
+  end
+
+  def wait_until
+    Watir::Wait.until { yield }
+  end
+
+  def wait_until_user_exits_window_and_shit
+    Watir::Wait.until { windows.size == 1 }
   end
 
   def apply_with_linked_in_link
@@ -70,4 +78,3 @@ class Driver
 
   attr_reader :urls
 end
-
