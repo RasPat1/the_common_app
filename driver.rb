@@ -5,11 +5,8 @@ class Driver
   extend Forwardable
   attr_reader :browser_instance
 
-  def initialize(urls:, browser_instance: nil)
-    @urls = urls
+  def initialize(browser_instance: nil)
     @browser_instance = browser_instance || default_browser
-
-    visit(urls[0])
   end
 
   def default_browser
@@ -23,10 +20,6 @@ class Driver
 
   def iframe_html
     iframe.html
-  end
-
-  def element(**args)
-    browser_instance.element(**args)
   end
 
   def execute_script(script, *args)
@@ -68,8 +61,19 @@ class Driver
     button(class: 'apply-with-linkedin-button')
   end
 
+  def safe_delegate(field_type, finder)
+    # byebug
+    safe_field = Driver.delegatable_methods.include?(field_type.to_sym)
+    raise StandardError.new("Delegate Error") unless safe_field
+    self.send(field_type, finder)
+  end
+
+  def self.delegatable_methods
+    [:html, :windows, :link, :button, :element, :text_field]
+  end
+
   private
   attr_reader :urls
 
-  def_delegators :browser_instance, :html, :windows, :link, :button
+  def_delegators :browser_instance, *delegatable_methods
 end

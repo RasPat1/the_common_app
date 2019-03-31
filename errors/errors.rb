@@ -1,0 +1,1 @@
+class UnknownStrategyError < StandardError; end

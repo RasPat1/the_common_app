@@ -1,0 +1,30 @@
+User:
+  first_name: John
+  last_name: Smith
+  dob: 01/01/1980
+  phone: 234-567-8901
+  email: john_smith@gmail.com
+
+  resume_location: file_path/resume.pdf
+
+  linkedin_link: /john.smith.209
+  github_link: /js209
+  personal_link: nil
+
+  gender: M
+  hispanic_latino: true
+  veteran_status: false
+  disability_status: nil
+
+Address:
+  address_no: 123
+  address_st: Main St
+  address_city: Springfield
+  address_state: IL
+  address_zip: 12345
+
+Orgs:
+  - name: Evernote
+    token: 1386988
+    callback_url: https://evernote.com/careers/job/
+    strategy: greenhouse
