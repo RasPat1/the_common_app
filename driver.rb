@@ -1,5 +1,4 @@
 require 'watir'
-require './config'
 require 'forwardable'
 
 class Driver
