@@ -16,11 +16,16 @@ class Driver
 
   delegate :html, :windows, :link, :button, to: :browser_instance
 
-  def initialize(urls:, browser_instance: Watir::Browser.new)
+  def initialize(urls:, browser_instance: nil)
     @urls = urls
-    @browser_instance = browser_instance
+    @browser_instance = browser_instance || default_browser
 
     visit(urls[0])
+  end
+
+  def default_browser
+    args = ['--auto-open-devtools-for-tabs']
+    Watir::Browser.new :chrome, options: { args: args }
   end
 
   def visit(url)
