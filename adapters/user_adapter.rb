@@ -12,6 +12,8 @@ class UserAdapter < Adapter
       phone: user_data["phone"],
       email: user_data["email"],
 
+      desired_location: user_data["desired_location"],
+
       gender: parse_gender(user_data["gender"]),
       hispanic_latino: user_data["hispanic_latino"],
       veteran_status: user_data["veteran_status"],

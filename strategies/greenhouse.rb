@@ -34,17 +34,21 @@ class Greenhouse < Strategy
     # hit submit....
     submit(driver: driver)
 
-    sleep 100
+    sleep 10
   end
 
   def url
     base = "https://boards.greenhouse.io/embed/job_app"
-    q_params = "?for=#{@org_name}&token=#{@token}"
+    q_params = "?for=#{org_name_for_url}&token=#{@token}"
     unless @callback_url.nil? || @callback_url.empty?
       q_params += "&b=#{@callback_url}"
     end
 
     base + q_params
+  end
+
+  def org_name_for_url
+    @org_name.gsub(" ", "").downcase
   end
 
   def fill(driver:, user:, fields:)
@@ -62,6 +66,8 @@ class Greenhouse < Strategy
         finder[finder_key] = field[finder_key]
       end
 
+      # we want to try to fill here and if it doesn't work
+      # keep moving
       driver
         .send(:safe_delegate, field_type, finder)
         .send(field[:mutate_keyword], data)

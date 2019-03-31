@@ -22,3 +22,10 @@
 * Headless browser class that opens the browser and clicks on 'apply with linked
 in'
 * Add a structured but flexible data set to get an idividuals information
+
+## NOTES
+---
+It looks liek some comapnies use a greenhosue iframe and some don't
+We're not sure how to get aroudn teh captcha
+THe nonw iframe versino shodul be prety easy to fill in as well
+It seems like each company shoudl be a strategy that is a subclass of a different stragegy. So we can do the evernote

@@ -4,6 +4,7 @@ class User
     :dob,
     :phone,
     :email,
+    :desired_location,
     :gender,
     :hispanic_latino,
     :veteran_status,
@@ -24,6 +25,7 @@ class User
       dob:,
       phone:,
       email:,
+      desired_location:,
       gender:,
       hispanic_latino:,
       veteran_status:,
@@ -38,6 +40,8 @@ class User
     @last_name = last_name
     @phone = phone
     @email = email
+
+    @desired_location = desired_location
 
     @gender = gender
     @hispanic_latino = hispanic_latino

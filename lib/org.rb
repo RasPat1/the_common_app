@@ -34,7 +34,7 @@ class Org
   # This way we allow enabled and disabled logic as well as possible aliasing to work here. It'll all work equally well at this point. Just keep moving.
   def self.manifest
     # keep these all lowercase for now
-    ['evernote']
+    ['evernote', 'the skimm']
   end
 
   def self.default_org

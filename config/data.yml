@@ -5,6 +5,8 @@ User:
   phone: 234-567-8901
   email: john_smith@gmail.com
 
+  desired_location: NYC
+
   linkedin_username: john.smith.209
   github_username: js209
   personal_link:
@@ -24,6 +26,10 @@ Address:
   address_zip: 12345
 
 Orgs:
+  - name: The Skimm
+    token: 1573385
+    callback_url: https://www.theskimm.com/jobs
+    strategy: greenhouse
   - name: Evernote
     token: 1386988
     callback_url: https://evernote.com/careers/job/
