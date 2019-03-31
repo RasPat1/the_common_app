@@ -12,7 +12,7 @@ class UserAdapter < Adapter
       phone: user_data["phone"],
       email: user_data["email"],
 
-      gender: user_data["gender"],
+      gender: parse_gender(user_data["gender"]),
       hispanic_latino: user_data["hispanic_latino"],
       veteran_status: user_data["veteran_status"],
       disability_status: user_data["disability_status"],
@@ -36,6 +36,20 @@ class UserAdapter < Adapter
     when :gh
       "https://www.github.com/#{path}"
     end
+  end
+
+  # We'd probablty store these as enums
+  # in the db not strings
+  def self.parse_gender(gender_str)
+    # case gender_str
+    # when 'M'
+    #   'Male'
+    # when 'F'
+    #   'Female'
+    # else
+    #   nil
+    # end
+    gender_str
   end
 
   def self.parse_dob(dob_string)

@@ -69,7 +69,7 @@ class Driver
   end
 
   def self.delegatable_methods
-    [:html, :windows, :link, :button, :element, :text_field]
+    [:html, :windows, :link, :button, :element, :text_field, :select_list]
   end
 
   private

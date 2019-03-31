@@ -39,6 +39,11 @@ class User
     @phone = phone
     @email = email
 
+    @gender = gender
+    @hispanic_latino = hispanic_latino
+    @veteran_status = veteran_status
+    @disability_status = disability_status
+
     @linkedin_link = linkedin_link
     @github_link = github_link
     @personal_link = personal_link
