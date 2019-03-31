@@ -5,8 +5,6 @@ User:
   phone: 234-567-8901
   email: john_smith@gmail.com
 
-  resume_location: file_path/resume.pdf
-
   linkedin_username: john.smith.209
   github_username: js209
   personal_link:
@@ -15,6 +13,8 @@ User:
   hispanic_latino: true
   veteran_status: false
   disability_status:
+
+  resume_path: ./tmp/resume.txt
 
 Address:
   address_no: 123

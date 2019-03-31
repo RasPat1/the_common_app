@@ -17,11 +17,11 @@ class UserAdapter < Adapter
       veteran_status: user_data["veteran_status"],
       disability_status: user_data["disability_status"],
 
-      resume_location: user_data["resume_location"],
-
       linkedin_link: linkify(user_data["linkedin_username"], :li),
       github_link: linkify(user_data["github_username"], :gh),
       personal_link: user_data["personal_link"],
+
+      resume_path: parse_path(user_data["resume_path"]),
     }
 
     validate(data)
@@ -55,6 +55,15 @@ class UserAdapter < Adapter
   def self.parse_dob(dob_string)
     # Something has to happen here right
     # Date.new(dob_string)
+  end
+
+  def self.parse_path(path)
+    # Does some validation as well I guess
+    if File.file?(path)
+      File.expand_path(path)
+    else
+      nil
+    end
   end
 
   def self.validate(data)

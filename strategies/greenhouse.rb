@@ -5,6 +5,8 @@ require 'byebug'
 class Greenhouse < Strategy
   attr_reader :org, :org_name, :token, :callback_url
 
+  SKIP_FINDER = :skip
+
   def initialize(
       org:,
       org_name:,
@@ -53,8 +55,12 @@ class Greenhouse < Strategy
       field_type = field[:type]
 
       finder_key = field[:preferred_finder_name].to_sym
+
       finder = {}
-      finder[finder_key] = field[finder_key]
+
+      if finder_key != SKIP_FINDER
+        finder[finder_key] = field[finder_key]
+      end
 
       driver
         .send(:safe_delegate, field_type, finder)
@@ -100,6 +106,7 @@ class Greenhouse < Strategy
         user_field_name: :phone,
         mutate_keyword: :set,
       },
+
       # then there are a bunch of drop downs
       {
         type: 'select_list',
@@ -128,6 +135,14 @@ class Greenhouse < Strategy
         preferred_finder_name: 'id',
         user_field_name: :disability_status,
         mutate_keyword: :select,
+      },
+
+      # Then there is uploading a resume
+      {
+        type: 'file_field',
+        preferred_finder_name: SKIP_FINDER,
+        user_field_name: :resume_path,
+        mutate_keyword: :set,
       },
     ]
   end

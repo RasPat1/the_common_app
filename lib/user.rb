@@ -8,10 +8,10 @@ class User
     :hispanic_latino,
     :veteran_status,
     :disability_status,
-    :resume_location,
     :linkedin_link,
     :github_link,
     :personal_link,
+    :resume_path,
     :address,
 
     # Custom Answers
@@ -28,10 +28,10 @@ class User
       hispanic_latino:,
       veteran_status:,
       disability_status:,
-      resume_location:,
       linkedin_link:,
       github_link:,
       personal_link:,
+      resume_path:,
       address:
     )
     @first_name = first_name
@@ -47,6 +47,10 @@ class User
     @linkedin_link = linkedin_link
     @github_link = github_link
     @personal_link = personal_link
+
+    @resume_path = resume_path
+
+    @address = address
   end
 
   # sometimes they ask for a website.

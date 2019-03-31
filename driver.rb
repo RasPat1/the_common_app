@@ -61,15 +61,15 @@ class Driver
     button(class: 'apply-with-linkedin-button')
   end
 
-  def safe_delegate(field_type, finder)
-    # byebug
+  def safe_delegate(field_type, finder = {})
     safe_field = Driver.delegatable_methods.include?(field_type.to_sym)
     raise StandardError.new("Delegate Error") unless safe_field
+
     self.send(field_type, finder)
   end
 
   def self.delegatable_methods
-    [:html, :windows, :link, :button, :element, :text_field, :select_list]
+    [:html, :windows, :link, :button, :element, :text_field, :select_list, :file_field]
   end
 
   private
